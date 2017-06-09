@@ -1,0 +1,8 @@
+export GOPATH=$HOME/projects
+go get gopl.io/ch1/helloworld
+$GOPATH/bin/helloworld
+
+go version
+go version go1.7.1 linux/amd64
+
+go get golang.org/x/tools/cmd/goimports

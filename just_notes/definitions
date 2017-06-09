@@ -1,0 +1,93 @@
+"go run" compiles the sources from .go files, links them against libraries and runs resulting executable.  ( On linux tmp binary for go run is placed under /tmp/go-buildXXXX)
+"go build" saves this executable permanently.
+
+go works with Unicode symbols, so text with any set of symbols is supported.
+
+go source code is organised with packages (similar to libraries or modules in other langs), they consist of a set of .go files. The very beginning of that files is "package" declaration that define  which package do they belong to. They may import other packages as well.
+
+Standard go library consists of >100 packages which are used for I/O, sorting, text processing and etc.
+"fmt" package has functions for input scanning and output formatting. ' Println ' outputs the values separated by spaces in scope of single row.
+
+"main" package defines executable file and not a library! function "main" in package "main" starts the program. It contains its instructions. Usually it refers to functions from other packages.
+
+"import" declarations are used *after "package" declaration* and their purpose is to point the compiler which packages are necessary for current program.
+
+The program won't compile if there are missing or extra unused imports.
+
+
+After this, the program contains definitions of functions, variables, constants and types (func, var, const, type). Usually no specific order is needed.
+
+Declaration of a function consists of "func", function name, the list of paramethers (empty for main()) , the list of results and its body (instructions between { } ). 
+
+Golang does not require ; as a separator between declarations, except if 2 and more instructions use the same row. The new row symbol is similar to ; , so it's important for syntax. 
+{ may be located in the same row with "func" declaration; x+y - new row is OK after +, not before.
+
+gofmt (and go fmt - recursively) brings standard formatting to the code. 
+
+gofmt may be executed after save in text editor.
+goimports automatically manages (adds/deletes) import declarations on demand. (go get golang.org/x/tools/cmd/goimports)
+
+
+"os" package - platform-independent interaction with OS
+Args var - arguments from cmd line (os.Args), consists of row slice
+slice is a sequence (dynamic-sized) of s array elements
+
+s[a], s[b:c], len(s)
+
+Индексация в go - полуоткрытые интервалы (первый индекс включен, последний исключен)
+s[m:n] , 0 <= m <= n <= len(s) contains n-m elements.
+
+os.Args[0] is command name, 1.. - its args
+all elements (args) - os.Args[1:len(os.Args)].
+
+by default m = 0, n = len(s), so equal to os.Args[1:]
+
+"import" order does not matter. May be declared with list 
+import (
+"..."
+"..."
+)
+
+gofmt sorts imports in alphabet order.
+
+var first, second string - two variables with type string
+
+if not implicitly initialized, variable will be initialized with null of its type (0 for number and "" for string)
+"+" is contatenating the values, e.g. sep + os.Args[i] concats the strings.
+
+s += sep + os.Args[i] assigns s value of concat of old s wth sep + os.Args[i]. Previous value of s may be collected by garbage collector.
+
++= is assignment, all math operators (-, *) have assignment operators respectively.
+
+:= is short variable declaration which declares some variables and assigns them a type with respect of initialize value.
+i++  ==   i += 1  ==   i = i + 1.
+
+operators are only postfix and it's instructions and not a expression.
+
+"for" is the only loop instruction in go. 1) "for init; condition; post-action {
+instruction
+}
+
+no braces in loop condition. { is mandatory.
+
+init is an initialization function which declares the var, increments or asssigns it  a value or callbacks a function.
+condition is calculated on each iteration, if it's true, loop body is executed. post-action is executed after loop body and condition is calculated again. Loop ends when condition returns false.
+any of this parts may be omitted. when init and post-action is omitted, and only cond is used, we may omit ; as well. endless loop looks like just for ( for { ... )
+break / return may end endless loop.
+
+2) also for may interate over the range of values (slice or strings) 
+for _, arg := range os.Args[1:] {
+
+"range" produces two values: index and a value of element with that index, but we don't need that index. Go range loop requires that we work with index as well, so we use *blank identifier "_".
+blank identifier is useful where syntax requires a variable name but we don't require that variable. 
+
+a, b := "", "" -- declare multiple vars
+the following is identical when declaring string vars:  s := "", var s string, var s = "", var s string = "".
+
+short var declaration ( := ) may be used only locally to the function, and not on inter-package level. 
+second is relied on initialization by default with value  "".
+third is used preliminary when declaring multiple vars.
+the last is useful only when types of var and initializator are different.
+
+usually first two are useful (first when default value is important, and second when default is OK)
+
