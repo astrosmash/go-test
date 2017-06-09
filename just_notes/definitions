@@ -91,3 +91,5 @@ the last is useful only when types of var and initializator are different.
 
 usually first two are useful (first when default value is important, and second when default is OK)
 
+software which copies files, prints, searches, sorts or count usually have same structure - loop over input, calculations over input's elements apiece and on-fly/post-action output generation.
+
