@@ -91,5 +91,34 @@ the last is useful only when types of var and initializator are different.
 
 usually first two are useful (first when default value is important, and second when default is OK)
 
+
 software which copies files, prints, searches, sorts or count usually have same structure - loop over input, calculations over input's elements apiece and on-fly/post-action output generation.
 
+
+"if"'s conditions don't need braces as well. needs only { on body.
+"else" specifies body when condition isn't true
+
+map - отображение. It contains a set of key and value pairs. Time for saving, extracting or checking for element's presence operations is constant. 
+keys may be any type (usually strings), but values of this type should support checking with '=='
+
+make(map[string]int) -- key is string, value is int
+'make' built-in functions creates new empty view
+
+counts := make(map[string]int)
+counts[input.Text]++
+is equal to
+line := input.Text
+counts[line] = counts[line]+1
+
+if there are no strings in the map, when we pass the new string, it assigns null value to the right respecting its type (for int is 0)
+
+we can create a loop (for) aroung the input.Scan(). Till the input stream exists, it reads the rows and returns true, otherwise it returns false and loop exits.
+
+fmt.Printf formats the output. 
+
+
+nil is special built-in value
+functions and other objects inside package may be declared in any order.
+
+make() creates the data structure, we can later reference it with link * . When the link passes to the function, it receives a copy of original structure, and changes are visible to the original function. 
+the referenced code works in stream mode, e.g. it receives input data in stream fashion and splits to the rows on demand. We can also mmap all the data in memory once, as well, then split into rows and then process. 
