@@ -121,4 +121,15 @@ nil is special built-in value
 functions and other objects inside package may be declared in any order.
 
 make() creates the data structure, we can later reference it with link * . When the link passes to the function, it receives a copy of original structure, and changes are visible to the original function. 
-the referenced code works in stream mode, e.g. it receives input data in stream fashion and splits to the rows on demand. We can also mmap all the data in memory once, as well, then split into rows and then process. 
+the referenced code works in stream mode, e.g. it receives input data in stream fashion and splits to the rows on demand. We can also mmap all the data in memory once, as well, then split into rows and then process.
+
+if we import a component from a package ("image/color"), we reference it by component name (e.g. color.Color)
+
+"const" expression assigns a name to constants, e.g. values that stay the same during compilation. It may be a number, a digit or an expession.
+
+[]color.Color{..}, git.GIF{..} - composite literals, first one is slice, second - struct.
+gif.GIF is a structure type.
+Structure is a set of values (fields), usually different types, which are represented as single object.
+
+anim := gif.GIF{LoopCount: 60} -- anim becomes a structure of type gif.GIF,  struct listeral creates struct's value, LoopCount is its field with value of 60, other values are null respecting their types. 
+anim.Image := 1 == gif.GIF.{ Image: 1}
